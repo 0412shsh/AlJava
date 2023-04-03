@@ -29,13 +29,18 @@ class Student {
         return false;
 
     }
+
+    @Override
+    public int hashCode() {
+        return studentId;
+    } // 해시 코드 값으로 학번을 반환하도록 메서드 재정의 !!
 }
 
 public class EqualsTest {
     public static void main(String[] args) {
         Student studentLee = new Student(100,"우연");
         Student studentLee2 = studentLee; // 주소복사
-        Student StudentWoo = new Student(100,"우연");
+        Student studentWoo = new Student(100,"우연");
 
         // 동일한 주소의 두 인스턴스 비교
         if(studentLee == studentLee2) { // == 기호로 비교
@@ -47,13 +52,19 @@ public class EqualsTest {
         } else  System.out.println("studnetLee와 studentLee2는 동일하지 않습니다.");
 
         // 동일인이지만 인스턴스의 주소가 다른 경우 비교
-        if(studentLee == StudentWoo) { // == 기호로 비교
+        if(studentLee == studentWoo) { // == 기호로 비교
             System.out.println("studnetLee와 StudentWoo 의 주소는 같습니다.");
         } else System.out.println("studnetLee와 StudentWoo 의 주소는 다릅니다.");
 
-        if(studentLee.equals(StudentWoo)) { //equeal로 비교
+        if(studentLee.equals(studentWoo)) { //equeal로 비교
             System.out.println("studnetLee와 StudentWoo 동일합니다.");
         } else  System.out.println("studnetLee와 StudentWoo 동일하지 않습니다.");
+
+        System.out.println("studentLee의 hashCode : "+studentLee.hashCode());
+        System.out.println("studentWoo hashCode : "+studentWoo.hashCode());
+
+        System.out.println("studentLee의 실제 주소값 : "+System.identityHashCode(studentLee));
+        System.out.println("studentWoo 실제 주소값 : "+System.identityHashCode(studentWoo)); // System에서 관리하는 고유값, 재정의 불가능 아이덴티티(수정불가)
 
     }
 }
