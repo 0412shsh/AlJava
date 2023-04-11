@@ -1,6 +1,7 @@
 package doItJava_ch12;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MemberArrayList {
     private ArrayList<Member> arrayList; // 멤버변수 ArrayList 선언 ==> 사용하기 위해 초기화 필요
@@ -16,15 +17,29 @@ public class MemberArrayList {
     } // ArrayList에 회원을 추가하는 메서드
 
     public boolean removeMember(int memberId){
-        for (int i = 0; i < arrayList.size(); i++) {
-            Member member = arrayList.get(i); // get() 메서드로 회원을 순차적으로 가져옴
+//        for (int i = 0; i < arrayList.size(); i++) {
+//            Member member = arrayList.get(i); // get() 메서드로 회원을 순차적으로 가져옴
+//            int tempId = member.getMemberId();
+//            if(tempId == memberId){ // 회원 아이디가 매개변수와 일치하면
+//                arrayList.remove(i); // 해당 회원을 삭제
+//                return true;
+//            }
+//        }
+//        System.out.println(memberId+"가 존재하지 않습니다. "); // 반복문이 끝날때까지 해당 아이디를 찾지 못하는 경우
+//        return false;
+
+
+        Iterator<Member> ir = arrayList.iterator(); // Iterator 반환
+        while (ir.hasNext()) { // 요소가 있는 동안
+            Member member = ir.next(); // 다음 회원을 반환 받음
             int tempId = member.getMemberId();
-            if(tempId == memberId){ // 회원 아이디가 매개변수와 일치하면
-                arrayList.remove(i); // 해당 회원을 삭제
+            if(tempId == memberId) { // 매개변수와 회원 아이디가 일치하다면
+                arrayList.remove(member); // 해당 회원 삭제
                 return true;
             }
+
         }
-        System.out.println(memberId+"가 존재하지 않습니다. "); // 반복문이 끝날때까지 해당 아이디를 찾지 못하는 경우
+        System.out.println(memberId+"가 존재하지 않습니다. ");
         return false;
     }
     public void showAllMember(){ // 전체 회원을 출력하는 메서드
