@@ -1,10 +1,12 @@
 package doItJava_ch12;
 
-public class Member implements Comparable<Member>{
+import java.util.Comparator;
+
+public class Member2 implements Comparator<Member2> {
     private int memberId; // 회원 아이디
     private String memberName; // 회원 이름
 
-    public Member(int memberId, String memberName) {
+    public Member2(int memberId, String memberName) {
         this.memberId = memberId;
         this.memberName = memberName;
     }
@@ -40,16 +42,16 @@ public class Member implements Comparable<Member>{
 
     @Override
     public boolean equals(Object obj) {
-         if(obj instanceof Member) {
-             Member member = (Member) obj;
-             if(this.memberId == member.getMemberId()) return true; // 매개변수로 받은 회원 아이디가 자신의 회원 아이디와 같다면 true 반환
-              else return false;
-         }
-         return false;
+        if(obj instanceof Member) {
+            Member member = (Member) obj;
+            if(this.memberId == member.getMemberId()) return true; // 매개변수로 받은 회원 아이디가 자신의 회원 아이디와 같다면 true 반환
+            else return false;
+        }
+        return false;
     }
 
     @Override
-    public int compareTo(Member member) {
-        return (this.memberId - member.memberId)*(-1); // compareTo() 메서드 재정의, 추가한 회원 아이디와 매개변수로 받은 회원 아이디를 비교함
+    public int compare(Member2 mem1, Member2 mem2) {
+        return mem1.getMemberId() - mem2.getMemberId();
     }
 }
